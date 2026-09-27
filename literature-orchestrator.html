@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Offshoot: Literature Orchestrator | Anay Rohatgi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="site-nav wrap" aria-label="Main">
+      <a class="home" href="index.html">Anay Rohatgi</a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="thesis.html">Cytotoxicity Thesis</a></li>
+        <li><a href="task-planner.html">Task Planner</a></li>
+        <li><a href="literature-orchestrator.html" aria-current="page">Offshoot: Literature Orchestrator</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main id="main">
+    <article class="project detail" data-accent="blue">
+      <div class="band">
+        <div class="band-inner wrap"><h1>Offshoot: Literature Orchestrator</h1></div>
+      </div>
+      <div class="wrap">
+        <div class="card detail-card">
+          <div class="visuals">
+            <figure class="diagram">
+              <svg viewBox="0 0 400 464" role="img" aria-labelledby="orch-title">
+                <title id="orch-title">How Offshoot is organized: a scheduled GitHub Actions run starts the coordinator, which uses stored passwords and a memory database, and hands jobs to three AI helpers: a collector, an idea finder and judge, and a writer. Each helper reports back to the coordinator; they never talk to each other. The collector gets new papers from arXiv, and the writer creates project drafts in Google Docs.</title>
+                <defs>
+                  <marker id="orch-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" fill="#1E56A0"/>
+                  </marker>
+                  <marker id="orch-arrow-grey" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M0 0L10 5L0 10z" fill="#5B6472"/>
+                  </marker>
+                </defs>
+
+                <g fill="none" stroke-width="2">
+                  <path d="M200 60V96" stroke="#1E56A0" marker-end="url(#orch-arrow)"/>
+                  <path d="M160 172L66 246" stroke="#1E56A0" marker-start="url(#orch-arrow)" marker-end="url(#orch-arrow)"/>
+                  <path d="M200 172V246" stroke="#1E56A0" marker-start="url(#orch-arrow)" marker-end="url(#orch-arrow)"/>
+                  <path d="M240 172L334 246" stroke="#1E56A0" marker-start="url(#orch-arrow)" marker-end="url(#orch-arrow)"/>
+                  <path d="M60 398V326" stroke="#1E56A0" marker-end="url(#orch-arrow)"/>
+                  <path d="M340 324V396" stroke="#1E56A0" marker-end="url(#orch-arrow)"/>
+                  <g stroke="#5B6472" stroke-dasharray="5 4">
+                    <path d="M100 135H121" marker-end="url(#orch-arrow-grey)"/>
+                    <path d="M279 135H296" marker-start="url(#orch-arrow-grey)" marker-end="url(#orch-arrow-grey)"/>
+                  </g>
+                </g>
+
+                <g fill="#fff" stroke="#1A2230" stroke-width="1.5">
+                  <rect x="110" y="6" width="180" height="54" rx="10"/>
+                  <rect x="1" y="108" width="98" height="54" rx="9"/>
+                  <rect x="301" y="108" width="98" height="54" rx="9"/>
+                  <rect x="1" y="400" width="118" height="58" rx="9"/>
+                  <rect x="281" y="400" width="118" height="58" rx="9"/>
+                </g>
+                <g fill="#1E56A0">
+                  <rect x="125" y="100" width="150" height="72" rx="10"/>
+                  <rect x="0" y="250" width="120" height="72" rx="10"/>
+                  <rect x="140" y="250" width="120" height="72" rx="10"/>
+                  <rect x="280" y="250" width="120" height="72" rx="10"/>
+                </g>
+
+                <g text-anchor="middle" font-weight="700" fill="#1A2230" font-size="17">
+                  <text x="200" y="30">GitHub Actions</text>
+                  <text x="50" y="140">Secrets</text>
+                  <text x="350" y="132">Memory</text>
+                  <text x="60" y="424">arXiv</text>
+                  <text x="340" y="424">Google Docs</text>
+                </g>
+                <g text-anchor="middle" fill="#3E4755" font-size="14">
+                  <text x="200" y="49">scheduled run</text>
+                  <text x="350" y="151">database</text>
+                  <text x="60" y="444">new papers</text>
+                  <text x="340" y="444">project drafts</text>
+                </g>
+                <g text-anchor="middle" font-weight="700" fill="#fff">
+                  <text x="200" y="134" font-size="20">Coordinator</text>
+                  <text x="60" y="292" font-size="18">Collector</text>
+                  <text x="200" y="282" font-size="17">Idea finder</text>
+                  <text x="200" y="303" font-size="17">+ judge</text>
+                  <text x="340" y="292" font-size="18">Writer</text>
+                </g>
+                <text x="200" y="156" text-anchor="middle" font-size="14" fill="#DCE6F3">tracks progress</text>
+              </svg>
+              <figcaption><strong>The coordinator is the manager.</strong> It hands each job to a specialist AI helper and collects the result; the helpers never talk to each other directly. The Collector gathers new papers, the Idea finder + judge picks out ideas and decides which fit, and the Writer turns them into drafts. Solid lines carry papers and results; dashed lines carry passwords and saved records.</figcaption>
+            </figure>
+            <nav class="toc" aria-label="On this page">
+              <p class="toc-title">On this page</p>
+              <ol>
+                <li><a href="#problem">Problem and motivation</a></li>
+                <li><a href="#approach">Approach</a></li>
+                <li><a href="#outcome">Outcome and results</a></li>
+                <li><a href="#skills">Skills practiced</a></li>
+                <li><a href="#next-steps">Challenges and what I'd do next</a></li>
+                <li><a href="#tools">Tools</a></li>
+              </ol>
+            </nav>          </div>
+
+          <div class="sections">
+            <p class="bottom-line">Building an AI system that reads new research papers and turns their unanswered questions into ideas for my next research project.</p>
+            <p class="meta">Built as Offshoot. Status: in development.</p>
+
+            <section id="problem">
+              <h2>Problem and motivation</h2>
+              <p>Research where biology meets AI moves fast in two fields at once, and the best project ideas rarely appear in a paper's summary. They're buried in a line like “further studies are needed” near the end, or in a list of open questions. Most tools that track new research stop at summarizing what a paper found; Offshoot goes after what a paper left unfinished and turns it into a project idea I can act on.</p>
+            </section>
+
+            <section id="approach">
+              <h2>Approach</h2>
+              <p>Offshoot works like a small team. A coordinator, the manager, hands each job to a specialist AI helper and collects the results. Each helper gets exactly the information it needs, several can work at the same time, and the coordinator keeps track of what's been done and redoes anything that goes wrong.</p>
+              <h3>Automatic start</h3>
+              <p>It runs on a schedule by itself on GitHub's servers, so it doesn't depend on my laptop being on.</p>
+              <h3>Collecting papers</h3>
+              <p>It pulls new papers from arXiv, a free online archive of research papers, in categories where biology overlaps with AI. It always looks back over the same stretch of recent submissions, so if one run is missed, the next one catches up.</p>
+              <h3>Finding and judging ideas</h3>
+              <p>An AI helper pulls out each paper's stated limitations, suggestions for future work, and methods that could be reused elsewhere. Its answers have to follow a set format, and they're checked and redone if they come out wrong. Each idea then gets a simple yes or no on whether it fits my research, based on examples I labeled by hand and one written set of criteria, so the standard stays consistent.</p>
+              <h3>Writing it up</h3>
+              <p>Accepted ideas become project drafts in Google Docs, with a goal, the gap in the research it's based on, steps, size and difficulty labels, and a link to the original paper. Rejected papers are saved for later review, and ideas the system is unsure about are flagged in the draft.</p>
+              <h3>Memory and security</h3>
+              <p>A small database remembers every paper it has already seen, so nothing gets sent twice. The code will be public on GitHub, so passwords and keys are kept out of it, and its access to Google is limited to only the files it works with.</p>
+            </section>
+
+            <section id="outcome">
+              <h2>Outcome and results</h2>
+              <p>The overall design is settled: which papers to collect, the yes-or-no judging, sending drafts only to Google Docs, and how the code is organized. I built a simple working version first, with one helper collecting papers, one pulling out ideas, and drafts written up directly, before adding extra features.</p>
+              <p>So far it has surfaced 50 papers and produced 5 possible project drafts. One of those became a project I've started: using continuous-time recurrent neural networks (CTRNNs), a type of AI model inspired by how neurons behave over time, to study immune network theory, the idea that parts of the immune system regulate one another as a network.</p>
+            </section>
+
+            <section id="skills">
+              <h2>Skills practiced</h2>
+              <ul>
+                <li>Designing a team of AI helpers that work together under a coordinator</li>
+                <li>Getting AI to give answers in a fixed, checkable format, and retrying when it doesn't</li>
+                <li>Building an automatic process that avoids duplicates and recovers from missed runs</li>
+                <li>Keeping passwords and keys out of public code</li>
+              </ul>
+            </section>
+
+            <section id="next-steps">
+              <h2>Challenges and what I'd do next</h2>
+              <p>Keeping the scope tight: an earlier design also added tasks to my to-do list and events to my calendar automatically. I cut that, because deciding to commit to a project should be my call during my weekly review, not the system's.</p>
+              <p>Next, on top of the working version: processing papers in batches, handling uncertain results more carefully, and splitting “finding ideas” and “judging fit” into separate steps. With that split, a retry fixes the actual problem: a badly read paper gets re-read, while a paper that simply isn't a good fit doesn't get re-read for nothing.</p>
+            </section>
+
+            <section id="tools">
+              <h2>Tools</h2>
+              <ul class="tools"><li>Claude Agent SDK (AI helpers)</li><li>arXiv (research papers)</li><li>SQLite (database)</li><li>Google Docs</li><li>GitHub Actions (scheduling)</li><li>Python</li></ul>
+            </section>
+
+            <p class="credit">Thank you to arXiv for use of its open access interoperability.</p>
+          </div>
+        </div>
+        <div class="project-end" id="contact">
+          <a class="next-project" href="thesis.html"><span>Next project</span>Biomaterial cytotoxicity thesis</a>
+          <p class="contact-line"><strong>Contact:</strong> <a href="mailto:rohatga@rose-hulman.edu">rohatga@rose-hulman.edu</a> Â· <a href="https://github.com/anayrohatgi">GitHub</a> Â· <a href="https://www.linkedin.com/in/anay-rohatgi">LinkedIn</a></p>
+        </div>
+      </div>
+    </article>
+  </main>
+  <footer><div class="wrap">Built with HTML and CSS, hosted on GitHub Pages.</div></footer>
+  <script src="script.js"></script>
+</body>
+</html>

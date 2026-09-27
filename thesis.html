@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cytotoxicity Thesis | Anay Rohatgi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-accent="purple">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="site-nav wrap" aria-label="Main">
+      <a class="home" href="index.html">Anay Rohatgi</a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="thesis.html" aria-current="page">Cytotoxicity Thesis</a></li>
+        <li><a href="task-planner.html">Task Planner</a></li>
+        <li><a href="literature-orchestrator.html">Offshoot: Literature Orchestrator</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main id="main">
+    <article class="project detail" data-accent="purple">
+      <div class="band">
+        <img class="band-media" src="images/thesis-bg.webp" alt="" loading="lazy" decoding="async">
+        <div class="band-inner wrap"><h1>Biomaterial cytotoxicity thesis</h1></div>
+      </div>
+      <div class="wrap">
+        <div class="card detail-card">
+          <figure class="wide-figure">
+            <div class="scroll-x">
+              <button type="button" class="img-trigger" aria-label="View protocol figure full size"><img src="images/thesis-protocol.svg" width="960" height="472" alt="Protocol iterations, Tests 1 to 4. UV sterilization: 12 hours in Tests 1 to 3, cut to 1 hour in Test 4. 70% ethanol soak: none in Test 1, overnight from Test 2 on. PBS step: none in Tests 1 and 2, a 12-hour soak in Test 3, a 5-minute dip in Test 4. Well plate: 96-well in Tests 1 to 3, 24-well in Test 4. All tests used MCF-7 cells, an MTT assay, a fulvestrant positive control, and a no-drug, no-material negative control." loading="lazy" decoding="async"></button>
+            </div>
+            <p class="scroll-hint">Swipe sideways to see all four tests.</p>
+            <figcaption>How we changed the way samples were prepared over the four iterations of the MTT test (a test of how many cells survive). Each row is one preparation step, and a colored box marks a change from the round before. In Test 4 we also adjusted the material's recipe to make it less acidic, which the chart doesn't show.</figcaption>
+          </figure>
+
+          <div class="visuals">
+            <nav class="toc" aria-label="On this page">
+              <p class="toc-title">On this page</p>
+              <ol>
+                <li><a href="#problem">Problem and motivation</a></li>
+                <li><a href="#approach">Approach</a></li>
+                <li><a href="#outcome">Outcome and results</a></li>
+                <li><a href="#skills">Skills practiced</a></li>
+                <li><a href="#next-steps">Challenges and what I'd do next</a></li>
+                <li><a href="#tools">Tools</a></li>
+              </ol>
+            </nav>
+          </div>
+          <div class="sections">
+            <p class="bottom-line">Tested whether a new boron-based material for bone implants harms living cells, and first had to figure out why the test said even a known-safe material was harmful. Accepted for presentation at the 2026 BMES Annual Meeting.</p>
+            <p class="meta">Conference abstract by Anay Rohatgi, Adel Alhalawani, and Ross Weatherman. Rose Research Fellows program, advised by Dr. Adel Alhalawani.</p>
+
+            <section id="problem">
+              <h2>Problem and motivation</h2>
+              <p>Bone implants still run into complications often, so researchers keep developing safer materials. This project checks whether a new boron-based material is safe for living cells, looking for a version that is as gentle on cells as possible while staying strong enough for an implant. The first hurdle was the test itself: every sample, even one that should have been completely safe, appeared to kill the MCF-7 cells (breast cancer cell line). That meant something in the test setup, not the materials, was likely to blame.</p>
+            </section>
+
+            <section id="approach">
+              <h2>Approach</h2>
+              <p>The material is a new boron-based biomaterial, made following <a href="https://pubmed.ncbi.nlm.nih.gov/27987724/">published preparation methods</a>. Samples were tested on MCF-7 cells with an MTT assay. Each test also included a drug known to harm these cells and a well with nothing added, so results could be compared against both extremes. We refined how samples were prepared over four rounds to remove the acidity problem.</p>
+            </section>
+
+            <section id="outcome">
+              <h2>Outcome and results</h2>
+              <ol>
+                <li><strong>Test 1</strong> (samples sterilized with UV light for 12 hours): the liquid around the cells turned acidic as soon as the samples went in, and every sample appeared to kill the cells. That suggested acidity, not the materials themselves, was the real problem.</li>
+                <li><strong>Test 2</strong> (added a soak in 70% alcohol, meant to draw the acid out): the liquid still turned acidic right away, and every sample still appeared harmful.</li>
+                <li><strong>Test 3</strong> (+ PBS soak): the acidity now took about ten minutes to appear instead of happening instantly, a partial improvement, but every sample still appeared harmful.</li>
+                <li><strong>Test 4</strong> (four changes at once: 1 hour of UV instead of 12, a quick rinse instead of a long soak, larger test wells, and a less acidic recipe): the known-safe material finally tested as safe, but every sample containing the new material still harmed the cells, even though earlier studies had described it as safe.</li>
+              </ol>
+            </section>
+
+            <section id="skills">
+              <h2>Skills practiced</h2>
+              <ul>
+                <li>Running MTT cytotoxicity assays on MCF-7 cells with positive and negative controls</li>
+                <li>Preparing material samples for testing on cells</li>
+                <li>Tracking down a misleading test result using acidity readings and published research</li>
+                <li>Writing a conference abstract</li>
+              </ul>
+            </section>
+
+            <section id="next-steps">
+              <h2>Challenges and what I'd do next</h2>
+              <p>With the poster deadline days away, we changed four things at once in Test 4 instead of one at a time, so we can't yet tell which change fixed the problem. Next, we'll test each change on its own and find out why the new material still harms cells.</p>
+            </section>
+
+            <section id="tools">
+              <h2>Tools</h2>
+              <ul class="tools"><li>MTT assay</li><li>MCF-7 cells</li><li>UV sterilization</li><li>Ethanol and PBS soaks</li><li>Multi-well test plates</li><li>Excel</li></ul>
+            </section>
+          </div>
+        </div>
+        <div class="project-end" id="contact">
+          <a class="next-project" href="task-planner.html"><span>Next project</span>AI-assisted task planner</a>
+          <p class="contact-line"><strong>Contact:</strong> <a href="mailto:rohatga@rose-hulman.edu">rohatga@rose-hulman.edu</a> Â· <a href="https://github.com/anayrohatgi">GitHub</a> Â· <a href="https://www.linkedin.com/in/anay-rohatgi">LinkedIn</a></p>
+        </div>
+      </div>
+    </article>
+  </main>
+  <footer><div class="wrap">Built with HTML and CSS, hosted on GitHub Pages.</div></footer>
+
+  <dialog id="lightbox" class="lightbox" aria-label="Full-size image">
+    <div class="lightbox-inner">
+      <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+      <img alt="" loading="lazy" decoding="async">
+    </div>
+  </dialog>
+  <script src="script.js"></script>
+</body>
+</html>

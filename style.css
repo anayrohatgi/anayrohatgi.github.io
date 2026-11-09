@@ -480,9 +480,6 @@ footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2.5rem; color: var
   .seg input:not(:checked):hover + .opt { border-color: var(--proj-accent); }
 }
 
-.model-note { margin: 1rem 0 0; max-width: 44rem; font-size: .9375rem; line-height: 1.5; }
-.model-note strong { font-family: var(--display); }
-
 /* One scenario at a time: no rule above it, a bit more air, and bigger clips. */
 .demo-js .town { display: none; }
 .demo-js .scenario { margin-top: 1.5rem; padding-top: 0; border-top: 0; }
@@ -496,7 +493,6 @@ footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2.5rem; color: var
   .detail-card--toc-right .sections { grid-column: 1; grid-row: 2; }
   .detail-card--toc-right .visuals { grid-column: 2; grid-row: 2; }
 }
-.demo-js .model-note { margin-top: 1.25rem; }
 .demo-js .scenario { margin-top: 1.25rem; }
 .demo-js .scenario > figcaption { margin-bottom: .9rem; }
 .demo-js .play-all { margin: 0 0 1rem; }
@@ -507,8 +503,8 @@ footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2.5rem; color: var
   font: 600 .9375rem var(--display); color: var(--proj-accent); text-decoration: underline; text-underline-offset: 3px;
 }
 .seg-all:focus-visible { outline: 2px solid var(--proj-accent); outline-offset: 2px; }
-.model-note p { max-width: none; }
-.model-note p + p { margin-top: .4rem; }
 @media (min-width: 761px) {
   .clips--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* "What each driver is" shows only the drivers ticked above; JS sets --n to how many. */
+  .demo-key { grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); max-width: calc(var(--n, 4) * 17rem); }
 }

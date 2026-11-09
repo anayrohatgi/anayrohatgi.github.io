@@ -45,10 +45,10 @@
   if (!maps.length) return;
 
   // Drivers: clips appear in the same order as the entries in the key below the demo.
+  var key = demo.querySelector('.demo-key');
   var keyItems = demo.querySelectorAll('.demo-key > div');
-  var models = Array.prototype.map.call(figs[0].querySelectorAll('.clip-name'), function (p, i) {
-    var dd = keyItems[i] && keyItems[i].querySelector('dd');
-    return { name: p.textContent.trim(), note: dd ? dd.textContent.trim() : '' };
+  var models = Array.prototype.map.call(figs[0].querySelectorAll('.clip-name'), function (p) {
+    return { name: p.textContent.trim() };
   });
   var allModels = models.map(function (m, i) { return i; });
 
@@ -100,9 +100,6 @@
 
   var picker = document.createElement('div');
   picker.className = 'picker';
-  var note = document.createElement('div');
-  note.className = 'model-note';
-  note.hidden = true;
 
   var scenarioGroup;
   function buildScenarioGroup() {
@@ -177,19 +174,9 @@
     play.textContent = PLAY_LABEL[count] || 'Play all';
     showAll.hidden = count === models.length;
 
-    // With fewer than all drivers on screen, describe the ones that are (the full key sits below the demo).
-    note.hidden = count === models.length;
-    note.textContent = '';
-    if (!note.hidden) {
-      state.models.forEach(function (i) {
-        var p = document.createElement('p');
-        var strong = document.createElement('strong');
-        strong.textContent = models[i].name + '. ';
-        p.appendChild(strong);
-        p.appendChild(document.createTextNode(models[i].note));
-        note.appendChild(p);
-      });
-    }
+    // "What each driver is" lists only the drivers on screen.
+    keyItems.forEach(function (item, i) { item.hidden = state.models.indexOf(i) === -1; });
+    if (key) key.style.setProperty('--n', count);
 
     if (fromUser) {
       try { history.replaceState(null, '', '#' + current.fig.id); } catch (e) { /* file:// */ }
@@ -214,7 +201,6 @@
   demo.classList.add('demo-js');
   var firstTown = demo.querySelector('.town');
   demo.insertBefore(picker, firstTown);
-  demo.insertBefore(note, firstTown);
   apply(false);
   if (deepLinked) demo.scrollIntoView();
 })();

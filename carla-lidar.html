@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LiDAR Self-Driving in CARLA | Anay Rohatgi</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <nav class="site-nav wrap" aria-label="Main">
+      <a class="home" href="index.html">Anay Rohatgi</a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="thesis.html">Cytotoxicity Thesis</a></li>
+        <li><a href="task-planner.html">Task Planner</a></li>
+        <li><a href="literature-orchestrator.html">Offshoot: Literature Orchestrator</a></li>
+        <li><a href="carla-lidar.html" aria-current="page">LiDAR Self-Driving</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main id="main">
+    <article class="project detail" data-accent="green">
+      <div class="band">
+        <div class="band-inner wrap"><h1>LiDAR Self-Driving in CARLA</h1></div>
+      </div>
+      <div class="wrap">
+        <div class="card detail-card">
+
+          <!-- Demo first: full card width, above the write-up. -->
+          <section class="demo" id="demo" aria-labelledby="demo-heading">
+            <p class="bottom-line">Teaching a simulated car to drive from LiDAR alone by copying an expert driver, then testing it against a hand-built rule-based driver in towns it never saw during training.</p>
+            <p class="meta">CSSE 416 (Deep Learning) team project at Rose-Hulman with <span class="todo">[partner's name]</span>, Fall 2026.</p>
+            <h2 id="demo-heading">Demo: same scenarios, four drivers</h2>
+            <p>Each row is one test scenario in a town none of the models were trained on. Every driver starts from the same place, with the same destination and the same seeded traffic, so the clips can be compared side by side. Traffic only starts to differ once the drivers behave differently. Press <strong>Play all four</strong> to start the clips together.</p>
+            <dl class="demo-key">
+              <div><dt>Rule-based baseline</dt><dd>Removes the ground from the LiDAR point cloud, groups the remaining points into obstacles, and brakes for anything on its route. The route follower steers.</dd></div>
+              <div><dt>CNN (speed only)</dt><dd>Our best learned model: a CNN on a top-down LiDAR grid that predicts throttle and brake. The same route follower steers.</dd></div>
+              <div><dt>CNN (full control)</dt><dd>A CNN on a LiDAR range image that also predicts steering, so it drives entirely on its own.</dd></div>
+              <div><dt>Transformer (full control)</dt><dd>Same input and outputs as the full-control CNN, with a transformer instead of convolutions, retrained with noise added to its speed input near a standstill. <span class="todo">[confirm wording with partner]</span></dd></div>
+            </dl>
+
+            <h3 class="town">Town02 <span>small town, two-lane streets</span></h3>
+
+            <figure class="scenario" id="town02-sc05">
+              <figcaption><strong>Scenario 5.</strong> The baseline finishes the route; both CNNs hit another vehicle about a fifth of the way in.</figcaption>
+              <button class="play-all" type="button">Play all four</button>
+              <div class="clips">
+                <div class="clip"><p class="clip-name">Rule-based baseline</p>
+                  <video src="videos/carla/baseline-dz-cap/Town02_sc05.mp4" controls muted playsinline preload="metadata" aria-label="Rule-based baseline, Town02 scenario 5"></video>
+                  <p class="outcome outcome--ok">Completed the route</p></div>
+                <div class="clip"><p class="clip-name">CNN (speed only)</p>
+                  <video src="videos/carla/m4_spread-dz-cap/Town02_sc05.mp4" controls muted playsinline preload="metadata" aria-label="CNN with throttle and brake only, Town02 scenario 5"></video>
+                  <p class="outcome outcome--crash">Collided with a vehicle · 20% of route</p></div>
+                <div class="clip"><p class="clip-name">CNN (full control)</p>
+                  <video src="videos/carla/cnn-dz-cap/Town02_sc05.mp4" controls muted playsinline preload="metadata" aria-label="Full-control CNN, Town02 scenario 5"></video>
+                  <p class="outcome outcome--crash">Collided with a vehicle · 19% of route</p></div>
+                <div class="clip"><p class="clip-name">Transformer (full control)</p>
+                  <video src="videos/carla/tf2-dz-cap/Town02_sc05.mp4" controls muted playsinline preload="metadata" aria-label="Transformer, Town02 scenario 5"></video>
+                  <p class="outcome outcome--stop">Never pulled away · stopped for 30 s</p></div>
+              </div>
+            </figure>
+
+            <figure class="scenario" id="town02-sc07">
+              <figcaption><strong>Scenario 7.</strong> The speed-only CNN finishes. The baseline stops for a large rock at the roadside: its geometric detector can't tell a rock face from a car, so it waits until the 30-second limit.</figcaption>
+              <button class="play-all" type="button">Play all four</button>
+              <div class="clips">
+                <div class="clip"><p class="clip-name">Rule-based baseline</p>
+                  <video src="videos/carla/baseline-dz-cap/Town02_sc07.mp4" controls muted playsinline preload="metadata" aria-label="Rule-based baseline, Town02 scenario 7"></video>
+                  <p class="outcome outcome--stop">Stopped for 30 s · 90% of route</p></div>
+                <div class="clip"><p class="clip-name">CNN (speed only)</p>
+                  <video src="videos/carla/m4_spread-dz-cap/Town02_sc07.mp4" controls muted playsinline preload="metadata" aria-label="CNN with throttle and brake only, Town02 scenario 7"></video>
+                  <p class="outcome outcome--ok">Completed the route</p></div>
+                <div class="clip"><p class="clip-name">CNN (full control)</p>
+                  <video src="videos/carla/cnn-dz-cap/Town02_sc07.mp4" controls muted playsinline preload="metadata" aria-label="Full-control CNN, Town02 scenario 7"></video>
+                  <p class="outcome outcome--crash">Collided with a vehicle · 12% of route</p></div>
+                <div class="clip"><p class="clip-name">Transformer (full control)</p>
+                  <video src="videos/carla/tf2-dz-cap/Town02_sc07.mp4" controls muted playsinline preload="metadata" aria-label="Transformer, Town02 scenario 7"></video>
+                  <p class="outcome outcome--stop">Never pulled away · stopped for 30 s</p></div>
+              </div>
+            </figure>
+
+            <h3 class="town">Town05 <span>grid of multi-lane streets</span></h3>
+
+            <figure class="scenario" id="town05-sc00">
+              <figcaption><strong>Scenario 0.</strong> The speed-only CNN finishes. The baseline is doing the right thing: it waits in a queue behind a car stopped at a red light. Our test counts any 30-second stop as stuck unless the light is at the car itself, so this ending says more about the test rule than about the baseline.</figcaption>
+              <button class="play-all" type="button">Play all four</button>
+              <div class="clips">
+                <div class="clip"><p class="clip-name">Rule-based baseline</p>
+                  <video src="videos/carla/baseline-dz-cap/Town05_sc00.mp4" controls muted playsinline preload="metadata" aria-label="Rule-based baseline, Town05 scenario 0"></video>
+                  <p class="outcome outcome--stop">Stopped for 30 s · 62% of route</p></div>
+                <div class="clip"><p class="clip-name">CNN (speed only)</p>
+                  <video src="videos/carla/m4_spread-dz-cap/Town05_sc00.mp4" controls muted playsinline preload="metadata" aria-label="CNN with throttle and brake only, Town05 scenario 0"></video>
+                  <p class="outcome outcome--ok">Completed the route</p></div>
+                <div class="clip"><p class="clip-name">CNN (full control)</p>
+                  <video src="videos/carla/cnn-dz-cap/Town05_sc00.mp4" controls muted playsinline preload="metadata" aria-label="Full-control CNN, Town05 scenario 0"></video>
+                  <p class="outcome outcome--stop">Stopped for 30 s · 11% of route</p></div>
+                <div class="clip"><p class="clip-name">Transformer (full control)</p>
+                  <video src="videos/carla/tf2-dz-cap/Town05_sc00.mp4" controls muted playsinline preload="metadata" aria-label="Transformer, Town05 scenario 0"></video>
+                  <p class="outcome outcome--stop">Never pulled away · stopped for 30 s</p></div>
+              </div>
+            </figure>
+
+            <figure class="scenario" id="town05-sc09">
+              <figcaption><strong>Scenario 9.</strong> The baseline finishes; the speed-only CNN collides just before the end, and the full-control CNN drifts off its route.</figcaption>
+              <button class="play-all" type="button">Play all four</button>
+              <div class="clips">
+                <div class="clip"><p class="clip-name">Rule-based baseline</p>
+                  <video src="videos/carla/baseline-dz-cap/Town05_sc09.mp4" controls muted playsinline preload="metadata" aria-label="Rule-based baseline, Town05 scenario 9"></video>
+                  <p class="outcome outcome--ok">Completed the route</p></div>
+                <div class="clip"><p class="clip-name">CNN (speed only)</p>
+                  <video src="videos/carla/m4_spread-dz-cap/Town05_sc09.mp4" controls muted playsinline preload="metadata" aria-label="CNN with throttle and brake only, Town05 scenario 9"></video>
+                  <p class="outcome outcome--crash">Collided with a vehicle · 99% of route</p></div>
+                <div class="clip"><p class="clip-name">CNN (full control)</p>
+                  <video src="videos/carla/cnn-dz-cap/Town05_sc09.mp4" controls muted playsinline preload="metadata" aria-label="Full-control CNN, Town05 scenario 9"></video>
+                  <p class="outcome outcome--off">Left the route (over 8 m off) · 22% of route</p></div>
+                <div class="clip"><p class="clip-name">Transformer (full control)</p>
+                  <video src="videos/carla/tf2-dz-cap/Town05_sc09.mp4" controls muted playsinline preload="metadata" aria-label="Transformer, Town05 scenario 9"></video>
+                  <p class="outcome outcome--stop">Never pulled away · stopped for 30 s</p></div>
+              </div>
+            </figure>
+          </section>
+
+          <div class="visuals">
+            <nav class="toc" aria-label="On this page">
+              <p class="toc-title">On this page</p>
+              <ol>
+                <li><a href="#demo">Demo</a></li>
+                <li><a href="#problem">Problem and motivation</a></li>
+                <li><a href="#approach">Approach</a></li>
+                <li><a href="#outcome">Outcome and results</a></li>
+                <li><a href="#skills">Skills practiced</a></li>
+                <li><a href="#next-steps">Challenges and what I'd do next</a></li>
+                <li><a href="#tools">Tools</a></li>
+              </ol>
+            </nav>
+          </div>
+
+          <div class="sections">
+            <section id="problem">
+              <h2>Problem and motivation</h2>
+              <p>Most teams in the class trained models to label LiDAR points (car, road, pedestrian). We wanted the harder version of the problem: a model that actually drives the car. Labeling points tells you what is around the car; driving means deciding what to do about it, every twentieth of a second, with your own mistakes changing what you see next.</p>
+            </section>
+
+            <section id="approach">
+              <h2>Approach</h2>
+              <h3>Learning by copying an expert</h3>
+              <p>CARLA, an open-source driving simulator, has a built-in autopilot. We drove it around two training towns and recorded about 25,000 moments of LiDAR alongside what the autopilot did with the steering, throttle and brake. The models learn to predict those controls from the LiDAR, the car's speed and the traffic-light state. This is called imitation learning, or behavior cloning.</p>
+              <h3>Testing in towns the models never saw</h3>
+              <p>Training, validation and testing each use different towns, so a model can't pass the test by memorizing streets. The test is driving, not prediction error: each driver runs the same 20 seeded scenarios (about 400 m each) across two test towns, and we count how each one ends. Prediction error on recorded data is reported only as a secondary number, because it is known to say little about how well a model drives.</p>
+              <h3>A rule-based baseline to beat</h3>
+              <p>The baseline uses no learning: it finds the ground plane in the point cloud (RANSAC), groups what's left into obstacles (DBSCAN), and brakes for anything inside a lane-wide corridor along its route. It sees the same LiDAR, speed and light state as the models.</p>
+              <h3>Fair conditions</h3>
+              <p>Every driver gets the same speed cap (50 km/h), the same start state, and the same post-processing of its controls. In the first milestone, the learned models control only throttle and brake, and the same route follower steers for them and for the baseline. The full-control models steer themselves, so they are compared with each other rather than with the baseline.</p>
+            </section>
+
+            <section id="outcome">
+              <h2>Outcome and results</h2>
+              <p>Results over all 20 test scenarios (Town02 and Town05):</p>
+              <div class="scroll-x">
+                <table class="results">
+                  <thead>
+                    <tr><th scope="col">Driver</th><th scope="col">Steering</th><th scope="col">Collisions</th><th scope="col">Completed</th><th scope="col">Stopped or out of time</th><th scope="col">Left route</th></tr>
+                  </thead>
+                  <tbody>
+                    <tr><th scope="row">Rule-based baseline</th><td>route follower</td><td>1</td><td>6</td><td>13</td><td>–</td></tr>
+                    <tr><th scope="row">CNN (speed only), spread brake labels</th><td>route follower</td><td>8</td><td>6</td><td>6</td><td>–</td></tr>
+                    <tr><th scope="row">CNN (speed only), spread labels + planned route as input<sup>*</sup></th><td>route follower</td><td>6</td><td>7</td><td>6</td><td>–</td></tr>
+                    <tr><th scope="row">CNN (speed only), original labels</th><td>route follower</td><td>18</td><td>2</td><td>0</td><td>–</td></tr>
+                    <tr><th scope="row">CNN (full control)</th><td>model</td><td>13</td><td>0</td><td>1</td><td>6</td></tr>
+                    <tr><th scope="row">Transformer (full control)</th><td>model</td><td>0</td><td>0</td><td>20</td><td>0</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="scroll-hint">Swipe the table sideways to see every column.</p>
+              <p class="meta"><sup>*</sup>19 of 20 scenarios so far. On those same 19, the model without the route input had 7 collisions and 6 completions, so the route input made little overall difference, though it hit vehicles less often (2 times instead of 5).</p>
+              <p>The baseline is by far the safest; its single collision is a pedestrian who steps out a few seconds into one scenario, which every driver hits. Its weakness is getting stuck: 13 of 20 runs end with it stopped for 30 seconds. Seven of those are correct waits (in red-light queues, and behind a crashed bus); the other six are the same large rock beside a Town02 road, which its detector mistakes for an obstacle.</p>
+              <p>The biggest improvement in the learned model came from the labels, not the network. The autopilot brakes in short single-frame pulses, so on most frames near a car the "right answer" was no brake, and the model learned to rarely brake. Stretching each brake pulse over its neighboring frames cut collisions from 18 to 8. The cost is caution: that model drives a half to a third as fast on average and runs out of time more often.</p>
+              <p>The full-control CNN steers well on recorded data but never finishes a route: once it drifts a little, it sees situations the expert never recorded, and the errors compound. That is a well-known weakness of pure imitation learning.</p>
+              <p>The transformer never moves at all: in every scenario it holds full brake from the first moment. In the training data the expert almost never accelerates from exactly zero speed, so the model learned that a stopped car stays stopped, and it reads its own speed rather than the road. This is a known failure of imitation learning, sometimes called the inertia problem, and retraining with noise on the speed input didn't remove it, because at low speeds the expert is still almost always braking in our recordings.</p>
+            </section>
+
+            <section id="skills">
+              <h2>Skills practiced</h2>
+              <ul>
+                <li>Building and training CNNs in PyTorch on LiDAR data</li>
+                <li>Designing a fair closed-loop test: fixed seeded scenarios, held-out towns, per-scenario reporting</li>
+                <li>Running a simulator headless on a shared SLURM GPU cluster</li>
+                <li>Debugging a model one hypothesis at a time: our first car never moved, and it took a chain of tests to find that a brake value of about 0.002 was enough for the simulator to hold it still</li>
+              </ul>
+            </section>
+
+            <section id="next-steps">
+              <h2>Challenges and what I'd do next</h2>
+              <p>The hardest part was that a model can look good on recorded data and still fail on the road. Our first models matched the expert's labels closely and then refused to move, or never braked for the car ahead. Every fix came from watching the failures and testing one explanation at a time.</p>
+              <p>Next: give the speed-only model the planned route as an extra input, so it can tell a car in its path from one beside it after a turn, which is where most of its crashes happen. For the full-control models, collect training data from the model's own mistakes (DAgger), the standard remedy for compounding errors.</p>
+            </section>
+
+            <section id="tools">
+              <h2>Tools</h2>
+              <ul class="tools"><li>CARLA 0.9.16 (simulator)</li><li>PyTorch</li><li>Python</li><li>NumPy</li><li>SLURM GPU cluster</li></ul>
+            </section>
+          </div>
+        </div>
+        <div class="project-end" id="contact">
+          <a class="next-project" href="thesis.html"><span>Next project</span>Biomaterial cytotoxicity thesis</a>
+          <p class="contact-line"><strong>Contact:</strong> <a href="mailto:rohatga@rose-hulman.edu">rohatga@rose-hulman.edu</a> · <a href="https://github.com/anayrohatgi">GitHub</a> · <a href="https://www.linkedin.com/in/anay-rohatgi">LinkedIn</a></p>
+        </div>
+      </div>
+    </article>
+  </main>
+  <footer><div class="wrap">Built with HTML and CSS, hosted on GitHub Pages.</div></footer>
+  <script src="script.js"></script>
+  <script>
+    // "Play all four": restart every clip in that scenario at the same moment.
+    document.querySelectorAll('.scenario').forEach(function (fig) {
+      var btn = fig.querySelector('.play-all');
+      var vids = fig.querySelectorAll('video');
+      btn.addEventListener('click', function () {
+        vids.forEach(function (v) {
+          v.currentTime = 0;
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});   // a missing clip just stays blank
+        });
+      });
+    });
+  </script>
+</body>
+</html>

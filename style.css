@@ -403,3 +403,49 @@ footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2.5rem; color: var
   @starting-style { .lightbox[open] { transform: none; } }
   .img-trigger:hover img, .img-trigger:active img { transform: none; }
 }
+
+/* ---------- LiDAR self-driving page (carla-lidar.html) ---------- */
+/* Fourth project accent. #2D6A3E is 6.5:1 with white text; its shadow is <= it in every channel. */
+:root { --accent-green: #2D6A3E; --shadow-green: #12291A; }
+[data-accent="green"] { --proj-accent: var(--accent-green); --proj-shadow: var(--shadow-green); }
+
+/* The demo spans the whole card, above the TOC and the write-up. */
+.demo { grid-column: 1 / -1; min-width: 0; }
+.demo > p { max-width: 44rem; }
+.demo > p + p { margin-top: .6rem; }
+.demo h2 { font-size: 1.6rem; margin: 1.5rem 0 .5rem; }
+.demo-key { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin: 1.25rem 0 0; }
+.demo-key div { border-top: 3px solid var(--proj-accent); padding-top: .5rem; }
+.demo-key dt { font: 700 .9375rem/1.3 var(--display); }
+.demo-key dd { margin: .25rem 0 0; font-size: .875rem; line-height: 1.5; color: var(--graphite); }
+.town { margin: 2.5rem 0 0; font-size: 1.4rem; color: var(--proj-accent); }
+.town span { font: 500 .9375rem var(--display); color: var(--graphite); margin-left: .5rem; }
+
+.project .scenario { margin: 1.25rem 0 0; padding-top: 1rem; border-top: 1px solid var(--rule); }
+.scenario > figcaption { font-size: .9375rem; color: var(--ink); margin: 0; max-width: 52rem; }
+.play-all {
+  margin: .6rem 0 .75rem; min-height: 44px; padding: 0 1rem; cursor: pointer;
+  font: 600 .9375rem var(--display); color: #fff; background: var(--proj-accent); border: 0;
+}
+.play-all:focus-visible { outline: 2px solid var(--proj-accent); outline-offset: 3px; }
+.clips { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem 1.25rem; }
+.clip { min-width: 0; }
+.clip-name { margin: 0 0 .3rem; font: 700 .9375rem var(--display); }
+.clip video { display: block; width: 100%; aspect-ratio: 16 / 9; background: var(--band); }
+/* Outcome text says what happened; the colored bar only repeats it. */
+.outcome { margin: .35rem 0 0; padding-left: .6rem; border-left: 4px solid var(--rule); font: 500 .875rem/1.4 var(--display); }
+.outcome--ok { border-left-color: var(--accent-green); }
+.outcome--crash { border-left-color: #B3261E; }
+.outcome--stop { border-left-color: #B07A00; }
+.outcome--off { border-left-color: var(--accent-purple); }
+
+.results { border-collapse: collapse; margin-top: .6rem; font: .875rem/1.4 var(--display); min-width: 34rem; }
+.results th, .results td { padding: .45rem .6rem; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
+.results thead th { font-weight: 700; border-bottom: 2px solid var(--ink); }
+.results tbody th { font-weight: 600; }
+.results td:nth-child(n+3) { text-align: right; }
+
+@media (max-width: 760px) {
+  .demo-key { grid-template-columns: minmax(0, 1fr); }
+  .clips { grid-template-columns: minmax(0, 1fr); }
+}

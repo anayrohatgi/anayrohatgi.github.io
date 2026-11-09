@@ -30,21 +30,14 @@
         <div class="band-inner wrap"><h1>LiDAR Self-Driving in CARLA</h1></div>
       </div>
       <div class="wrap">
-        <div class="card detail-card">
+        <div class="card detail-card detail-card--toc-right">
 
           <!-- Demo first: full card width, above the write-up. -->
           <section class="demo" id="demo" aria-labelledby="demo-heading">
             <p class="bottom-line">Teaching a simulated car to drive from LiDAR alone by copying an expert driver, then testing it against a hand-built rule-based driver in towns it never saw during training.</p>
             <p class="meta">CSSE 416 (Deep Learning) team project at Rose-Hulman with William Bi, Fall 2026.</p>
             <h2 id="demo-heading">Demo: same scenarios, four drivers</h2>
-            <p>Each row is one test scenario in a town none of the models were trained on. Every driver starts from the same place, with the same destination and the same seeded traffic, so the clips can be compared side by side. Traffic only starts to differ once the drivers behave differently. Press <strong>Play all four</strong> to start the clips together.</p>
-            <dl class="demo-key">
-              <div><dt>Rule-based baseline</dt><dd>Removes the ground from the LiDAR point cloud, groups the remaining points into obstacles, and brakes for anything on its route. The route follower steers.</dd></div>
-              <div><dt>CNN (speed only)</dt><dd>Our best learned model: a CNN on a top-down LiDAR grid that predicts throttle and brake. The same route follower steers.</dd></div>
-              <div><dt>CNN (full control)</dt><dd>A CNN on a LiDAR range image that also predicts steering, so it drives entirely on its own.</dd></div>
-              <div><dt>Transformer (full control)</dt><dd>Same input and outputs as the full-control CNN, with a transformer instead of convolutions, retrained with noise added to its speed input near a standstill.</dd></div>
-            </dl>
-
+            <p>Each scenario is a test route in a town none of the models were trained on. Every driver starts from the same place, with the same destination and the same seeded traffic, so the clips can be compared side by side. Traffic only starts to differ once the drivers behave differently. Pick a map and scenario, then tick any of the drivers to compare just those. The play button above the clips starts them together.</p>
             <h3 class="town">Town02 <span>small town, two-lane streets</span></h3>
 
             <figure class="scenario" id="town02-sc05">
@@ -124,6 +117,14 @@
                   <p class="outcome outcome--stop">Never pulled away · stopped for 30 s</p></div>
               </div>
             </figure>
+
+            <h3 class="key-title">What each driver is</h3>
+            <dl class="demo-key">
+              <div><dt>Rule-based baseline</dt><dd>Removes the ground from the LiDAR point cloud, groups the remaining points into obstacles, and brakes for anything on its route. The route follower steers.</dd></div>
+              <div><dt>CNN (speed only)</dt><dd>Our best learned model: a CNN on a top-down LiDAR grid that predicts throttle and brake. The same route follower steers.</dd></div>
+              <div><dt>CNN (full control)</dt><dd>A CNN on a LiDAR range image that also predicts steering, so it drives entirely on its own.</dd></div>
+              <div><dt>Transformer (full control)</dt><dd>Same input and outputs as the full-control CNN, with a transformer instead of convolutions, retrained with noise added to its speed input near a standstill.</dd></div>
+            </dl>
           </section>
 
           <div class="visuals">
@@ -216,19 +217,6 @@
   </main>
   <footer><div class="wrap">Built with HTML and CSS, hosted on GitHub Pages.</div></footer>
   <script src="script.js"></script>
-  <script>
-    // "Play all four": restart every clip in that scenario at the same moment.
-    document.querySelectorAll('.scenario').forEach(function (fig) {
-      var btn = fig.querySelector('.play-all');
-      var vids = fig.querySelectorAll('video');
-      btn.addEventListener('click', function () {
-        vids.forEach(function (v) {
-          v.currentTime = 0;
-          var p = v.play();
-          if (p && p.catch) p.catch(function () {});   // a missing clip just stays blank
-        });
-      });
-    });
-  </script>
+  <script src="carla-demo.js"></script>
 </body>
 </html>

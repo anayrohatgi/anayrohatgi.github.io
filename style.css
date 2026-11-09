@@ -449,3 +449,61 @@ footer { border-top: 1px solid var(--rule); padding: 1.5rem 0 2.5rem; color: var
   .demo-key { grid-template-columns: minmax(0, 1fr); }
   .clips { grid-template-columns: minmax(0, 1fr); }
 }
+
+/* ---------- LiDAR page: demo picker and right-hand section links ---------- */
+.demo [hidden] { display: none !important; }
+.key-title { font-size: 1.15rem; margin: 2.5rem 0 0; }
+.key-title + .demo-key { margin-top: .75rem; }
+
+/* Map, scenario and driver selectors. Real radio inputs, so arrow keys and screen readers work. */
+.picker { display: grid; gap: 1rem; margin: 1.5rem 0 0; }
+.picker fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+.picker legend { padding: 0; margin: 0 0 .4rem; font: 600 .75rem var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--graphite); }
+.seg { display: flex; flex-wrap: wrap; gap: .5rem; }
+.seg label { position: relative; display: block; cursor: pointer; }
+.seg input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.seg .opt {
+  display: flex; flex-direction: column; justify-content: center; min-height: 44px; padding: .45rem .9rem;
+  background: #fff; border: 1.5px solid var(--ink); color: var(--ink); font: 600 .9375rem/1.25 var(--display);
+}
+.seg .opt small { font: 500 .8125rem/1.3 var(--display); color: var(--graphite); }
+.seg input:checked + .opt { background: var(--proj-accent); border-color: var(--proj-accent); color: #fff; }
+.seg input:checked + .opt small { color: #fff; }
+.seg input:focus-visible + .opt { outline: 2px solid var(--proj-accent); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) {
+  .seg .opt { transition: background-color 120ms ease, border-color 120ms ease; }
+  .seg input:not(:checked):hover + .opt { border-color: var(--proj-accent); }
+}
+
+.model-note { margin: 1rem 0 0; max-width: 44rem; font-size: .9375rem; line-height: 1.5; }
+.model-note strong { font-family: var(--display); }
+
+/* One scenario at a time: no rule above it, a bit more air, and bigger clips. */
+.demo-js .town { display: none; }
+.demo-js .scenario { margin-top: 1.5rem; padding-top: 0; border-top: 0; }
+.demo-js .clips { gap: 1.25rem 1.5rem; }
+.clips--single { grid-template-columns: minmax(0, 1fr); }
+.clips--single .clip { max-width: 46rem; }
+
+/* Wide screens: section links in a narrow right-hand column. */
+@media (min-width: 761px) {
+  .detail-card--toc-right { grid-template-columns: minmax(0, 1fr) 12.5rem; }
+  .detail-card--toc-right .sections { grid-column: 1; grid-row: 2; }
+  .detail-card--toc-right .visuals { grid-column: 2; grid-row: 2; }
+}
+.demo-js .model-note { margin-top: 1.25rem; }
+.demo-js .scenario { margin-top: 1.25rem; }
+.demo-js .scenario > figcaption { margin-bottom: .9rem; }
+.demo-js .play-all { margin: 0 0 1rem; }
+
+/* Driver picker: several can be ticked, so keep the "show all" shortcut beside them. */
+.seg-all {
+  margin: .5rem 0 0; padding: .35rem 0; min-height: 44px; background: none; border: 0; cursor: pointer;
+  font: 600 .9375rem var(--display); color: var(--proj-accent); text-decoration: underline; text-underline-offset: 3px;
+}
+.seg-all:focus-visible { outline: 2px solid var(--proj-accent); outline-offset: 2px; }
+.model-note p { max-width: none; }
+.model-note p + p { margin-top: .4rem; }
+@media (min-width: 761px) {
+  .clips--three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}

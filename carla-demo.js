@@ -115,10 +115,16 @@
     scenarioGroup = next;
   }
 
-  picker.appendChild(optionGroup('Map', 'radio', 'demo-map',
-    maps.map(function (m, i) { return { value: String(i), label: m.name, hint: m.blurb }; }),
+  // The buttons carry only the town name; the selected town's description sits under them,
+  // so nothing about the other town stays on screen.
+  var mapGroup = optionGroup('Map', 'radio', 'demo-map',
+    maps.map(function (m, i) { return { value: String(i), label: m.name }; }),
     [String(state.map)],
-    function (v) { state.map = Number(v); state.scen = 0; buildScenarioGroup(); apply(true); }));
+    function (v) { state.map = Number(v); state.scen = 0; buildScenarioGroup(); apply(true); });
+  var mapBlurb = document.createElement('p');
+  mapBlurb.className = 'map-blurb';
+  mapGroup.appendChild(mapBlurb);
+  picker.appendChild(mapGroup);
   buildScenarioGroup();
 
   var modelGroup = optionGroup('Drivers (tick the ones to compare)', 'checkbox', 'demo-model',
@@ -154,6 +160,8 @@
         s.fig.hidden = s !== current;
       });
     });
+
+    mapBlurb.textContent = maps[state.map].blurb;
 
     var count = state.models.length;
     current.fig.querySelectorAll('.clip').forEach(function (clip, i) {
